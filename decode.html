@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+  .countainer {
+    width: 500px;
+    margin-top: 100px;
+    font-size: 18px;
+  }
+  .nav-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: darkslategrey;
+    list-style-type: none;
+  }
+  .nav-item {
+    padding: 15px;
+    cursor: pointer;
+    color: white;
+  }
+  .nav-item a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+  }
+  .nav-item:nth-child(1) {
+    background-color: lightseagreen;
+  }
+  .nav-item a:hover {
+    background-color: lightseagreen;
+    color: white;
+  }
+  label {
+     font-size: 20px;
+     font-family: 'Nanum Gothic', sans-serif;
+  }
+
+  textarea.form-control {
+    width: 600px;
+    height: 200px;
+  }
+  .container {
+    margin-top: 50px;
+  }
+
+  .words {
+    font-size: 30px;
+    float: right;
+  }
+  span {
+    font-family: 'Arial Black';
+    font-size: 50px;
+  }
+
+  </style>
+  <meta charset="utf-8">
+  <title> 글자 수 세기 </title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="dcode.js"></script>
+</head>
+  <body>
+    <script>
+    window.onload = function () {
+      document.getElementById("go1").onclick = go1;
+    };
+    </script>
+    <div class="main">
+      <h1 class="centered">카이사르 암호 복호화</h1>
+    </div>
+    <div class="container">
+       <div id="in1">
+            <label> 암호화 원문 </label>
+            <textarea class="form-control" rows="15" placeholder="카이사르 암호 원문" id="input"></textarea>
+        </div>
+        <div>
+          <select id = "number">
+            <option value="1">1번</option>
+            <option value="2">2번</option>
+            <option value="3">3번</option>
+            <option value="4">4번</option>
+            <option value="5">5번</option>
+            <option value="6">6번</option>
+            <option value="7">7번</option>
+            <option value="8">8번</option>
+            <option value="9">9번</option>
+            <option value="10">10번</option>
+          <input type="button" value="START" id="go1"/>
+          <div>
+            <div class="form-group">
+                <label> 복호화 원문 </label>
+                <textarea class="form-control" rows="15" placeholder="카이사르 암호 복호화" id="later"></textarea>
+            </div>
+      <script>
+      function go1() {
+
+          txt = document.getElementById("input");
+          cnt = document.getElementById("number").value;
+          word = txt.value.split("");
+          //answer += "A".charCodeAt(0);
+          //alert(String.fromCharCode(65));
+          answer = "Answer is... \n\n";
+          temp = 0;
+          solution();
+          outer = document.getElementById("later");
+          outer.innerHTML = answer;
+      }
+
+
+      function solution(){
+          for(var i=0; i<cnt; i++){
+              answer = 0;
+              answer += i+1;
+              answer += ". ";
+              for(var j=0;j<word.length;j++){
+                 if(word[j]==" "){
+                     answer += " ";
+                  }
+                  else{
+                      temp = word[j].charCodeAt(0);
+                      if((temp >= 65) && (temp <= 90)){
+                          temp-=i;
+                          if(temp>=91){
+                              temp -= 26;
+                          }
+                          answer += String.fromCharCode(temp);
+                      }
+                      else{
+                          temp-=i;
+                          if(temp>=123){
+                              temp -= 26;
+                          }
+                          answer += String.fromCharCode(temp);
+                      }
+                  }
+              }
+          }
+      }
+      </script>
+      </div>
+  </body>
+    </html>
